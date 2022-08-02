@@ -1,0 +1,13 @@
+diff --git a/drivers/clk/imx/clk.c b/drivers/clk/imx/clk.c
+index 6c0029950d38..bf34cd7063fd 100644
+--- a/drivers/clk/imx/clk.c
++++ b/drivers/clk/imx/clk.c
+@@ -167,8 +167,6 @@ static void imx_earlycon_uart_clks_onoff(bool is_on)
+ 
+ 		if (is_on)
+ 			clk_prepare_enable(uart_clk);
+-		else
+-			clk_disable_unprepare(uart_clk);
+ 	} while (true);
+ 
+ 	if (is_on)
