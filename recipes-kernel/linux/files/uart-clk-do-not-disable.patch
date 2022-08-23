@@ -1,8 +1,8 @@
 diff --git a/drivers/clk/imx/clk.c b/drivers/clk/imx/clk.c
-index 140eb2153507..7a7b0ccaf2d8 100644
+index 6c0029950d38..7f877a775ade 100644
 --- a/drivers/clk/imx/clk.c
 +++ b/drivers/clk/imx/clk.c
-@@ -151,6 +151,14 @@ __setup_param("earlycon", imx_keep_uart_earlycon,
+@@ -148,6 +148,14 @@ __setup_param("earlycon", imx_keep_uart_earlycon,
  __setup_param("earlyprintk", imx_keep_uart_earlyprintk,
               imx_keep_uart_clocks_param, 0);
  
@@ -17,7 +17,7 @@ index 140eb2153507..7a7b0ccaf2d8 100644
  static void imx_earlycon_uart_clks_onoff(bool is_on)
  {
         struct clk *uart_clk;
-@@ -170,7 +178,7 @@ static void imx_earlycon_uart_clks_onoff(bool is_on)
+@@ -167,7 +175,7 @@ static void imx_earlycon_uart_clks_onoff(bool is_on)
  
                 if (is_on)
                         clk_prepare_enable(uart_clk);
