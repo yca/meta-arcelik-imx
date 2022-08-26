@@ -1,0 +1,40 @@
+From 4d26b842193c6e822899dd11f914768e2a27d3f6 Mon Sep 17 00:00:00 2001
+From: Ubuntu <ubuntu@ip-172-31-0-156.eu-central-1.compute.internal>
+Date: Wed, 24 Aug 2022 19:20:00 +0000
+Subject: [PATCH] arm: imx: add clock disable hack.
+
+---
+ drivers/clk/imx/clk.c | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/clk/imx/clk.c b/drivers/clk/imx/clk.c
+index 6c0029950d38..7f877a775ade 100644
+--- a/drivers/clk/imx/clk.c
++++ b/drivers/clk/imx/clk.c
+@@ -148,6 +148,14 @@ __setup_param("earlycon", imx_keep_uart_earlycon,
+ __setup_param("earlyprintk", imx_keep_uart_earlyprintk,
+ 	      imx_keep_uart_clocks_param, 0);
+ 
++static int _arcelik_uart_hack;
++static int __init arcelik_uart_hack(char *par)
++{
++       _arcelik_uart_hack = 1;
++       return 0;
++}
++early_param("arcelik_uart_hack", arcelik_uart_hack);
++
+ static void imx_earlycon_uart_clks_onoff(bool is_on)
+ {
+ 	struct clk *uart_clk;
+@@ -167,7 +175,7 @@ static void imx_earlycon_uart_clks_onoff(bool is_on)
+ 
+ 		if (is_on)
+ 			clk_prepare_enable(uart_clk);
+-		else
++		else if (!_arcelik_uart_hack)
+ 			clk_disable_unprepare(uart_clk);
+ 	} while (true);
+ 
+-- 
+2.25.1
+
